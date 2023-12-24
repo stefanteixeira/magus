@@ -1,0 +1,258 @@
+.rc-picker {
+  @apply input input-bordered relative inline-flex min-w-[16rem] overflow-hidden p-0;
+
+  &-rtl {
+    direction: rtl;
+  }
+
+  &-focused {
+    @apply outline outline-2 outline-offset-2 outline-base-content/20;
+  }
+
+  &-panel {
+    @apply inline-block align-top;
+
+    /* &-focused {
+      border-color: blue;
+    } */
+
+    &-rtl {
+      direction: rtl;
+    }
+  }
+
+  /* ===================== Shared Panel ===================== */
+  &-date-panel,
+  &-date-panel {
+    @apply flex flex-col;
+
+    table {
+      @apply border-collapse text-center;
+    }
+    tr,
+    td {
+      @apply border-none;
+    }
+  }
+
+  /* // Header */
+  &-header {
+    @apply flex;
+
+    > button {
+      @apply btn btn-ghost no-animation btn-sm w-6 flex-1 p-0;
+    }
+
+    &-view {
+      @apply flex-auto text-center;
+
+      > button {
+        @apply btn btn-ghost no-animation btn-sm;
+      }
+    }
+  }
+
+  /* // Content */
+  &-content {
+    th {
+      @apply h-8 w-8 cursor-default text-sm;
+    }
+  }
+
+  &-cell {
+    @apply relative text-gray-300;
+
+    &-disabled {
+      &:after {
+        @apply absolute inset-0 cursor-not-allowed bg-base-100 bg-opacity-50 content-[''];
+      }
+    }
+
+    &-inner {
+      @apply btn btn-ghost no-animation btn-sm;
+    }
+
+    &-in-view {
+      @apply text-base-content;
+    }
+
+    &-range-start,
+    &-range-end {
+      @apply bg-primary/20;
+    }
+
+    &-range-start {
+      @apply rounded-l-lg;
+    }
+
+    &-range-end {
+      @apply rounded-r-lg;
+    }
+
+    &-in-range {
+      @apply bg-primary/20;
+
+      & > &-inner {
+        /* @apply bg-base-200; */
+      }
+    }
+
+    &-range-hover-start,
+    &-range-hover-end,
+    &-range-hover {
+      /* @apply bg-primary/30; */
+
+      &:not(.rc-picker-cell-in-view) {
+        @apply text-gray-400;
+      }
+
+      &::after {
+        @apply pointer-events-none absolute inset-px border-y border-dashed content-[''];
+      }
+    }
+
+    &-range-hover-start {
+      &::after {
+        @apply rounded-l-lg border-l;
+      }
+    }
+
+    &-range-hover-end {
+      &::after {
+        @apply rounded-r-lg border-r;
+      }
+    }
+
+    &-today > &-inner {
+      @apply border-primary text-gray-400;
+    }
+    &-range-start > &-inner,
+    &-range-end > &-inner,
+    &-selected > &-inner {
+      @apply btn-primary text-gray-400;
+    }
+  }
+
+  &-footer {
+    @apply -mx-2 mt-2 border-t p-2 pb-0;
+
+    &-extra {
+      @apply mb-2 text-sm;
+    }
+  }
+
+  &-ranges {
+    @apply flex justify-between overflow-hidden;
+  }
+
+  &-today-btn {
+    @apply btn btn-primary btn-xs btn-block;
+  }
+
+  &-now-btn {
+    @apply link-hover link link-primary text-sm;
+  }
+
+  &-ok > button {
+    @apply btn btn-xs;
+  }
+
+  /* // ====================== Date Panel ====================== */
+  &-date-panel {
+    .rc-picker-cell-inner {
+      @apply w-8;
+    }
+  }
+
+  /* // ======================== Input ========================= */
+  &-input {
+    @apply relative inline-flex w-full;
+
+    .rc-picker-rtl & {
+      @apply text-right;
+    }
+
+    > input {
+      @apply w-full bg-base-100 pl-4 pr-0 text-base-content outline-none;
+
+      &:disabled {
+        @apply cursor-not-allowed bg-transparent;
+      }
+    }
+  }
+
+  &-suffix,
+  &-clear {
+    @apply -mt-[1px] flex h-12 w-12 flex-none items-center justify-center;
+  }
+
+  &-suffix {
+    &-icon {
+      @apply h-5 w-5 text-gray-400;
+    }
+  }
+
+  &-clear {
+    @apply absolute right-0;
+
+    &-btn {
+      @apply btn btn-sm mx-2 h-8 w-8 border-gray-400 bg-gray-400 text-lg opacity-0;
+
+      &::after {
+        @apply content-['×'];
+      }
+    }
+
+    .rc-picker-rtl & {
+      @apply left-2 right-auto;
+    }
+  }
+
+  &:hover {
+    .rc-picker-clear-btn {
+      @apply opacity-100;
+    }
+  }
+
+  /* // ======================= Dropdown ======================= */
+  &-dropdown {
+    @apply absolute overflow-hidden rounded-lg bg-base-100 p-2 shadow;
+
+    &-range {
+      @apply p-2;
+    }
+
+    &-hidden {
+      @apply hidden;
+    }
+  }
+
+  /* // ========================================================
+  // =                     Range Picker                     =
+  // ======================================================== */
+  &-range {
+    /* @apply relative; */
+
+    &-wrapper {
+      @apply flex;
+    }
+
+    .rc-picker-active-bar {
+      @apply pointer-events-none bottom-0 h-0.5 bg-primary opacity-0 transition-all duration-300;
+    }
+
+    &.rc-picker-focused {
+      .rc-picker-active-bar {
+        @apply opacity-100;
+      }
+    }
+
+    &-separator {
+      @apply flex items-center px-2 text-lg text-base-content;
+    }
+  }
+
+  &-panel-container {
+    @apply inline-block align-top transition-[margin] duration-300;
+  }
+}
